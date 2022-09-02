@@ -12,5 +12,14 @@
   "dependencies": {
     "express": "^4.18.1"
   },
-  "description": ""
+  "description": "",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nicolas50399/backendRepo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Nicolas50399/backendRepo/issues"
+  },
+  "homepage": "https://github.com/Nicolas50399/backendRepo#readme"
 }

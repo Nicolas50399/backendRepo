@@ -1,1 +1,1 @@
-[{"name":"Notebook","marca":"Lenovo","price":25000,"id":1}]
+[]

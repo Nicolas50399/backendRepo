@@ -25,7 +25,6 @@ app.get('/productoRandom', async (req, res) => {
 });
 
 
-
 app.listen(8080, () => {
     console.log("Servidor listo")
 })

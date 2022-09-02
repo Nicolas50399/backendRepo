@@ -140,7 +140,7 @@ const contenedor = new Contenedor();
 //Hay que usar las funciones una por una, ya que al ser asincronas no se van a ejecutar secuencialmente
 
 contenedor.createFile();
-contenedor.save(notebook);
+//contenedor.save(notebook);
 //contenedor.save(televisor);
 //contenedor.save(auriculares);
 //contenedor.getById(1)
@@ -149,4 +149,4 @@ contenedor.save(notebook);
 //contenedor.getAll();
 //contenedor.deleteAll();
 
-module.exports = contenedor
+module.exports = Contenedor;
