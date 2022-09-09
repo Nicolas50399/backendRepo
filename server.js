@@ -1,10 +1,16 @@
 const express = require('express');
 const app = express();
-const db = require("./main.js")
+//const db = require("./main.js")
+const productosRouter = require('./apirestful')
 
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use('/api/productos', productosRouter)
+
+app.use("/", express.static(__dirname + "/public"));
+
+/*
 const DB = new db();
 
 app.get('/productos', async (req, res) => {
@@ -23,6 +29,8 @@ app.get('/productoRandom', async (req, res) => {
         return res.status(404).send({ error: true, msg: e.message })
     }
 });
+*/
+
 
 
 app.listen(8080, () => {

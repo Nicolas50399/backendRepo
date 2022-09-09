@@ -47,13 +47,13 @@ class Contenedor {
         const data = await fs.promises.readFile(
             `${this.file}`, 'utf-8'
            );
-        const personas = JSON.parse(data);
+        const productos = JSON.parse(data);
         
 
-        const personaBuscada = personas.find((unaPersona) => unaPersona.id == id)
-        if(personaBuscada){
-            console.log(personaBuscada);
-            return personaBuscada;
+        const productoBuscado = productos.find((unProducto) => unProducto.id == id)
+        if(productoBuscado){
+            console.log(productoBuscado);
+            return productoBuscado;
         }
         else{
             const noEncontrado = "Producto no encontrado"
