@@ -13,9 +13,9 @@ const DB = new db();
 
 app.set('views', './views');
 
-app.set('view engine', 'pug');
+//app.set('view engine', 'pug');
 
-app.set('view engine', 'ejs');
+//app.set('view engine', 'ejs');
 
 /*
 app.get('/indexPug', (req, res) => {
@@ -47,11 +47,11 @@ app.get('/', (req, res) => {
         mascots: mascots,
         tagline: tagline
     });
-});*/
+});
 
 app.get('./indexEjs', (req, res) => {
     res.render('pages/indexEjs');
-})
+})*/
 
 
 const bcrypt = require("bcrypt");
@@ -62,8 +62,8 @@ const handlebars = require("express-handlebars");
 
 app.get("/agregarProductos", (req, res) => {
     res.render("indexHbs", { layout: "agregarProductos" }); //*EN HANDLEBARS
-    res.render("indexPug");//*EN PUG
-    res.render('pages/indexEjs');//*EN EJS
+    //res.render("indexPug");//*EN PUG
+    //res.render('pages/indexEjs');//*EN EJS
 
 });
 app.get("/admin", async (req, res) => {

@@ -30,8 +30,30 @@ app.get('/productoRandom', async (req, res) => {
     }
 });
 
+//*-------------------------WEBSOCKETS---------------------------------------
 
+const { Server: IOServer } = require('socket.io')
+const { Server: HttpServer } = require('http')
+const httpServer = new HttpServer(app)
+const io = new IOServer(httpServer)
 
+app.use(express.static('./views/layouts'))
+
+httpServer.listen(8081, function() {
+    console.log('Servidor corriendo en http://localhost:8081')
+})
+
+io.on('connection', (socket) => {
+    console.log('Un cliente se ha conectado')
+    socket.emit('productsList', productsList)
+
+    socket.on('new-product', data => {
+        productsList.push(data)
+        io.sockets.emit('productsList', productsList)//Notifica a todos los sockets conectados
+    })
+})
+
+productsList = DB.getAll();
 
 app.listen(8080, () => {
     console.log("Servidor listo")
