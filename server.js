@@ -13,6 +13,7 @@ app.use("/", express.static(__dirname + "/public"));
 
 const DB = new db();
 
+
 app.get('/productos', async (req, res) => {
     const data = await DB.getAll();
     res.send(data);
@@ -30,6 +31,7 @@ app.get('/productoRandom', async (req, res) => {
     }
 });
 
+/*
 //*-------------------------WEBSOCKETS---------------------------------------
 
 const { Server: IOServer } = require('socket.io')
@@ -54,7 +56,7 @@ io.on('connection', (socket) => {
 })
 
 productsList = DB.getAll();
-
+*/
 app.listen(8080, () => {
     console.log("Servidor listo")
 })

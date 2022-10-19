@@ -13,47 +13,7 @@ const DB = new db();
 
 app.set('views', './views');
 
-//app.set('view engine', 'pug');
-
-//app.set('view engine', 'ejs');
-
 /*
-app.get('/indexPug', (req, res) => {
-    res.render('indexPug.pug', { titulo: 'Usando Pug JS en Express' });
-});
-
-app.get('/indexPug', (req, res) => {
-    res.send('Hola mundo');
-})
-app.get('/urlparam', (req, res) => {
-    res.send(req.query);
-})
-app.post('/urljson', (req, res) => {
-    res.send(req.body);
-})
-
-
-
-
-app.get('/', (req, res) => {
-    var mascots = [
-        { name: 'Sammy', organization: 'DigitalOcean', birth_year: 2012 },
-        { name: 'Tux', organization: 'Linux', birth_year: 1996 },
-        { name: 'Moby Dock', organization: 'Docker', birth_year: 2013 }
-    ]
-    var tagline = "No programming concept is complete without a cute animal mascot.";
-
-    res.render('pages/indexPug', {
-        mascots: mascots,
-        tagline: tagline
-    });
-});
-
-app.get('./indexEjs', (req, res) => {
-    res.render('pages/indexEjs');
-})*/
-
-
 const bcrypt = require("bcrypt");
 const handlebars = require("express-handlebars");
 
@@ -62,8 +22,6 @@ const handlebars = require("express-handlebars");
 
 app.get("/agregarProductos", (req, res) => {
     res.render("indexHbs", { layout: "agregarProductos" }); //*EN HANDLEBARS
-    //res.render("indexPug");//*EN PUG
-    //res.render('pages/indexEjs');//*EN EJS
 
 });
 app.get("/admin", async (req, res) => {
@@ -82,16 +40,27 @@ app.get("/producto/:id", async (req, res) => {
 
     res.render("indexHbs", { layout: "productos", productos });//*EN HANDLEBARS
 });
-
+*/
 //*-------------------------REQUEST---------------------------------------
 
+const esAdmin = true;
+
+const protegida = (req, res, next) => { //MIDDLEWARE QUE REVISA SI EL USUARIO ES ADMIN O NO
+    if(esAdmin){
+        next()
+    }
+    else{
+        console.log("No es admin")
+    }
+}
 
 router.get('/', async (req, res) =>{
     const data = await DB.getAll();
     return res.send(data);
 })
 
-router.get('/:id', async(req, res) => {
+router.get('/:id', protegida, async(req, res) => {
+
     const { id } = req.params;
     try{
         const data = await DB.getById(id);
