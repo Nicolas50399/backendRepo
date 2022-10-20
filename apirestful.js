@@ -55,15 +55,16 @@ const protegida = (req, res, next) => { //MIDDLEWARE QUE REVISA SI EL USUARIO ES
 }
 
 router.get('/', async (req, res) =>{
-    const data = await DB.getAll();
+    const data = await DB.getAll('productos.txt');
     return res.send(data);
 })
 
-router.get('/:id', protegida, async(req, res) => {
+//*DISPONIBLE PARA USUARIOS Y ADMINISTRADORES
+router.get('/:id', async(req, res) => {
 
     const { id } = req.params;
     try{
-        const data = await DB.getById(id);
+        const data = await DB.getById(id, 'productos.txt');
         return res.send(data);
     }
     catch(e){
@@ -71,10 +72,11 @@ router.get('/:id', protegida, async(req, res) => {
     }
 })
 
-router.post('/', async (req, res) => {
+//*DISPONIBLE SOLO PARA ADMINISTRADORES
+router.post('/', protegida, async (req, res) => {
     const { producto } = req.body;
     try{
-        const id = await DB.save(producto);
+        const id = await DB.save(producto, 'productos.txt');
 
         return res.send({agregado: producto, id: id});
     }
@@ -83,22 +85,22 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', protegida, async (req, res) => {
     const {id} = req.params;
     const {producto} = req.body;
-    const productos = await DB.getAll();
-    const pos = productos.indexOf(await DB.getById(id))
+    const productos = await DB.getAll('productos.txt');
+    const pos = productos.indexOf(await DB.getById(id, 'productos.txt'))
     const anterior = productos[pos];
     productos[pos] = producto;
     res.send({actualizado: producto, anterior: anterior})
     
 })
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', protegida, async (req, res) => {
     const {id} = req.params;
     try{
-        const eliminado = await DB.getById(id);
-        await DB.deleteById(id);
+        const eliminado = await DB.getById(id, 'productos.txt');
+        await DB.deleteById(id, 'productos.txt');
         return res.send({eliminado: eliminado});
     }
     catch(e){
