@@ -15,13 +15,22 @@ class ContenedorBDD{
     async crearTabla(nameTable){
         await knex.schema.createTable(`${nameTable}`, table => {
             //id, timestamp, nombre, descripcion, codigo, foto_url, precio, stock
-            table.increments('id')
-            table.timestamp('timestamp').defaultTo(knex.fn.now())
-            table.string('nombre')
-            table.string('descripcion')
-            table.string('foto_url')
-            table.float('precio')
-            table.integer('stock')
+            switch(nameTable){
+                case 'productos': {
+                    table.increments('id')
+                    table.timestamp('timestamp').defaultTo(knex.fn.now())
+                    table.string('nombre')
+                    table.string('descripcion')
+                    table.string('foto_url')
+                    table.float('precio')
+                    table.integer('stock')
+                }
+                break;
+                case 'mensajes': {
+                    table.increments('id')
+                }
+            }
+            
         })
         .then(() => console.log(`Tabla ${nameTable} creada`))
         .catch((e) => {console.log(e); throw e})
@@ -32,15 +41,26 @@ class ContenedorBDD{
 
     async insertarDato(producto, nameTable){
         try {
-            await knex(`${nameTable}`).insert({
-                timestamp: producto.timestamp,
-                nombre: producto.nombre,
-                descripcion: producto.descripcion,
-                foto_url: producto.fotoUrl,
-                precio: producto.precio,
-                stock: producto.stock
-            })
-            console.log(`Dato ${nameTable} insertado!`)
+            switch(nameTable){
+                case 'productos': {
+                    await knex(`${nameTable}`).insert({
+                        timestamp: producto.timestamp,
+                        nombre: producto.nombre,
+                        descripcion: producto.descripcion,
+                        foto_url: producto.fotoUrl,
+                        precio: producto.precio,
+                        stock: producto.stock
+                    })
+                }
+                break;
+                case 'mensajes': {
+                    await knex(`${nameTable}`).insert({
+                        
+                    })
+                }
+            }
+           
+            console.log(`Dato de ${nameTable} insertado!`)
         }
         catch (e) {
             console.log('no se pudo acceder a la base de datos');

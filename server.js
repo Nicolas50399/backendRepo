@@ -32,7 +32,7 @@ app.get('/productoRandom', async (req, res) => {
     }
 });
 
-/*
+
 //*-------------------------WEBSOCKETS---------------------------------------
 
 const { Server: IOServer } = require('socket.io')
@@ -57,7 +57,8 @@ io.on('connection', (socket) => {
 })
 
 productsList = DB.getAll();
-*/
+
+
 app.listen(8080, () => {
     console.log("Servidor listo")
 })
