@@ -14,8 +14,9 @@ class ContenedorBDD{
 
     async crearTabla(nameTable){
         await knex.schema.createTable(`${nameTable}`, table => {
-            //id, timestamp, nombre, descripcion, codigo, foto_url, precio, stock
+            
             switch(nameTable){
+                //id, timestamp, nombre, descripcion, codigo, foto_url, precio, stock
                 case 'productos': {
                     table.increments('id')
                     table.timestamp('timestamp').defaultTo(knex.fn.now())
