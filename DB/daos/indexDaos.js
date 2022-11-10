@@ -10,8 +10,8 @@ const daos = {
       "./carrito/DAOCarritoMongo.js"
     );
     return {
-      trainerDAO: new DAOCarritoMongo(),
-      pokemonDAO: new DAOProductoMongo(),
+      carritoDAO: new DAOCarritoMongo(),
+      productoDAO: new DAOProductoMongo(),
     };
   },
   firebase: async () => {
@@ -22,8 +22,8 @@ const daos = {
       "./carrito/DAOCarritoFirebase"
     );
     return {
-      trainerDAO: new DAOCarritoFirebase(),
-      pokemonDAO: new DAOProductoFirebase(),
+      carritoDAO: new DAOCarritoFirebase(),
+      productoDAO: new DAOProductoFirebase(),
     };
   },
 };
